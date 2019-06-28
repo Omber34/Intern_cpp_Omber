@@ -1,14 +1,14 @@
 #pragma once
 #include <boost/fusion/tuple.hpp>
 #include <boost/fusion/include/tuple.hpp>
-#include <boost/detail/lightweight_test.hpp>
-#include <boost/fusion/sequence/hash.hpp>
-#include <boost/functional/hash.hpp>
-#include <boost/fusion/tuple/tuple.hpp>
-#include <boost/fusion/sequence/comparison/equal_to.hpp>
-#include <boost/fusion/tuple/make_tuple.hpp>
 #include <boost/fusion/include/make_tuple.hpp>
+#include <boost/fusion/sequence/hash.hpp>
+#include <boost/fusion/sequence/comparison/equal_to.hpp>
+#include <boost/fusion/tuple/tuple.hpp>
+#include <boost/fusion/tuple/make_tuple.hpp>
 #include <boost/fusion/adapted/boost_tuple.hpp>
+#include <boost/functional/hash.hpp>
+#include <boost/detail/lightweight_test.hpp>
 #include <boost/tuple/tuple.hpp>
 
 #include <unordered_map>
