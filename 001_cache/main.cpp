@@ -9,7 +9,7 @@ int impTestFunc(int i)
 
 int TestFunc(int i)
 {
-	static Cache<int , int> cache(&impTestFunc);
+	static Cache<FIFOClearPolicy,int , int> cache(&impTestFunc);
 	return cache.find(std::move(i));
 }
 
