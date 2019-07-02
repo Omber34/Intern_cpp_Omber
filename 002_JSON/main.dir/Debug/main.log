@@ -1,3 +1,0 @@
-﻿  main.cpp
-C:\Users\Герман\Desktop\Intership\Intern_cpp_Omber\002_JSON\main.cpp(5): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  main.vcxproj -> C:\Users\Герман\Desktop\Intership\Intern_cpp_Omber\002_JSON\Debug\main.exe

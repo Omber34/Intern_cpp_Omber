@@ -1,5 +1,6 @@
 *build*
 *libs*
+*Debug*
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
@@ -9,3 +10,12 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
+*.exe
+*.lib
+*.obj
+*.tlog
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.ilk
