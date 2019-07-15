@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.12)
+project( RotateImg )
+set(OpenCV_DIR "path-to-opencv/lib")
+include_directories("path-to-opencv/bin")
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( Rotate main.cpp )
+target_link_libraries( Rotate ${OpenCV_LIBS} )
