@@ -20,12 +20,11 @@ void test_alhorithm(const char * msg,Mat & etlon,Mat & scene)
     Mat descriptors_object, descriptors_scene;
     detector->detectAndCompute( img_object, noArray(), keypoints_object, descriptors_object );
     detector->detectAndCompute( img_scene, noArray(), keypoints_scene, descriptors_scene );
-    //-- Step 2: Matching descriptor vectors with a FLANN based matcher
-    // Since SURF is a floating-point descriptor NORM_L2 is used
+    
     Ptr<DescriptorMatcher> matcher = DescriptorMatcher::create(DescriptorMatcher::FLANNBASED);
     std::vector< std::vector<DMatch> > knn_matches;
     matcher->knnMatch( descriptors_object, descriptors_scene, knn_matches, 2 );
-    //-- Filter matches using the Lowe's ratio test
+   
     size_t matches = knn_matches.size();
     const float ratio_thresh = 0.75f;
     std::vector<DMatch> good_matches;
@@ -37,21 +36,21 @@ void test_alhorithm(const char * msg,Mat & etlon,Mat & scene)
         }
     }
     size_t _matches = good_matches.size();
-    //-- Draw matches
+   
     Mat img_matches;
     drawMatches( img_object, keypoints_object, img_scene, keypoints_scene, good_matches, img_matches, Scalar::all(-1),
                  Scalar::all(-1), std::vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
-    //-- Localize the object
+   
     std::vector<Point2f> obj;
     std::vector<Point2f> scene;
     for( size_t i = 0; i < good_matches.size(); i++ )
     {
-        //-- Get the keypoints from the good matches
+       
         obj.push_back( keypoints_object[ good_matches[i].queryIdx ].pt );
         scene.push_back( keypoints_scene[ good_matches[i].trainIdx ].pt );
     }
     Mat H = findHomography( obj, scene, RANSAC );
-    //-- Get the corners from the image_1 ( the object to be "detected" )
+   
     std::vector<Point2f> obj_corners(4);
     obj_corners[0] = Point2f(0, 0);
     obj_corners[1] = Point2f( (float)img_object.cols, 0 );
@@ -68,7 +67,7 @@ void test_alhorithm(const char * msg,Mat & etlon,Mat & scene)
           scene_corners[3] + Point2f((float)img_object.cols, 0), Scalar( 0, 255, 0), 4 );
     line( img_matches, scene_corners[3] + Point2f((float)img_object.cols, 0),
           scene_corners[0] + Point2f((float)img_object.cols, 0), Scalar( 0, 255, 0), 4 );
-    //-- Show detected matches
+    
     imshow("Good Matches & Object detection", img_matches );
     std::cout << "Alh: " << msg << endl;
     std::cout << "proceccing time: " <<time() - begin << endl;
@@ -79,11 +78,8 @@ void test_alhorithm(const char * msg,Mat & etlon,Mat & scene)
 
 int main( int argc, char* argv[] )
 {
-    
     Mat img_object = imread( "etalon_img.jpg" );
-    Mat img_scene = imread( "scene_img.jpg" );
-    //-- Step 1: Detect the keypoints using SURF Detector, compute the descriptors
-    // ORB / AKAZE / GFTT
+    Mat img_scene = imread( "scene_img.jpg" );   
     test_alhorithm<ORB>("ORB",img_object,img_scene);
     test_alhorithm<AKAZE>("AKAZE",img_object,img_scene);
     test_alhorithm<KAZE>("KAZE",img_object,img_scene);
